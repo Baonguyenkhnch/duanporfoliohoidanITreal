@@ -8,11 +8,18 @@ import { MdFileDownload } from "react-icons/md";
 import { AiFillFire } from "react-icons/ai";
 
 interface IProps {
-    scrollToExperienceSection:()=>void;
+    scrollToExperienceSection: () => void;
 }
-const HeroLeft = (props:IProps) => {
+const HeroLeft = (props: IProps) => {
 
     const { t } = useTranslation();
+    const openInNewTab = (url: string): void => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
+    const handleDowloadCV = () => {
+        openInNewTab("")
+    }
 
     return (
         <div className='hero-left'>
@@ -52,7 +59,7 @@ const HeroLeft = (props:IProps) => {
             </div>
             <div className="d-md-flex d-none gap-4">
                 <ResizeButton
-                onClick={()=>props.scrollToExperienceSection}
+                    onClick={() => props.scrollToExperienceSection}
                     btnText={t("heroSection.exp")}
                     btnIcons={<AiFillFire style={{ color: "orange" }} />}
                     btnStyle={{
@@ -65,6 +72,7 @@ const HeroLeft = (props:IProps) => {
                 <ResizeButton
                     btnText={t("heroSection.cv")}
                     btnIcons={<MdFileDownload />}
+                    onClick={handleDowloadCV}
                 />
 
             </div>
